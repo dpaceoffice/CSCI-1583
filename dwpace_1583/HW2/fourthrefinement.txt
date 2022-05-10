@@ -1,0 +1,60 @@
+//Import scanner and Arraylist
+//Declare public class named GuessingGame
+	//Declare integers the game uses
+	//Declare the array used to check for duplicates
+	//Declare and assign the scanner to keyboard
+	//Declare the main method
+		//Print prompt for user
+		//Call init method
+	//Declare static method init
+		//assigns all the variables, they're dynamic, so in order to restart the game at points, this method is important.
+		//assigns arraylist to a new ArrayList object, not specific datatype
+		//this checks if the user actually pressed enter or input some text
+			//if so, lets start the game by getting the next value to guess, null because we dont need it right now
+			//if they entered something, lets reprompt them
+			//recall the method not going to use a return here, dont want it to send the first message again
+	//declare next value, string argument is >  or <
+		//if the value is -1, which is should be if we just started, skip everything and set the value
+			//if value is not -1, lets check the input
+			//if the input is > then that means we need to change our minimum number to guess
+				//sets the min value to 1 over the previous guess
+				//lets guess half of the new possible guesses
+				//check is needed for numbers that are exactly 100. Otherwise the above algorithm will not work
+				//this next line is used for debugging
+				//System.out.println("Min:"+min+" Max:"+max+" lastValue"+lastValue);
+			//if the input is < then we are changing out maximum guess
+				//lets set the max value we can guess to 1 less than the value
+				//the new value is half of our new range of numbers to guess
+				//check is need for numbers that are exactly 1
+				//this is for debugging.
+				//System.out.println("Min:"+min+" Max:"+max);
+				//if the input is not > or < promot the user to re enter everything.
+				//recall this method to start over, looking for > or <
+				//end this method here, we dont want it to contiue at all.
+			//set the value to 50 because its -1, 50 is our middle number
+		  	//used for debugging
+		  	//System.out.println(""+value+" "+lastValue);
+		  	//lets add out guess to our array for checking
+		  	//lets check if there are any duplicates here and invoke checkDuplicates();
+		  	//increase the try count by 1
+		  	//if the value is not the same as the last guess, and the value is not exceeding our possible answers contiue
+		  	if(lastValue != value && (value <= 100 && value >= 1)) {//still going to make sure that the game does not double guess an answer
+		  		//lets set the lastvalue to make sure things go smoothly
+				//prompt user to confirm our guess
+				//invoke handleGuess for next part
+			} else {//this should never happen.
+				//prompt user that the the algorithm is no longer going to work for some reason
+		  		//used for debugging
+		  		//System.out.println((value <= 100 && value >= 1));
+		  		//restart the game
+	//declare checkduplicates
+		for (int i = 0; i < valueList.size(); i++)//scans list indexs
+  			for (int a = i+1; a < valueList.size(); a++)//scans indexs 1 ahead of i
+    			if (i != a && valueList.get(i) == valueList.get(a)) {//if a, 1 ahead of i, is the same as i, we have a duplicate.
+    				valueList.clear();//lets clear the list, init should do this when we instance another array, but just playing it safe.
+		  			init();//we need to restart and reset our variables here.
+		//if the answer is Y do whats next
+			System.exit(0);//a return statment will bring us back to nextValue(), where lastValue has changed. Game is over anyways, lets end the JVM.
+		//if the value is N, lets do this
+			//if other checks are not fulfilled they entered the wrong thing
+			handleGuess(input.nextLine());//lets just retry this method.
